@@ -1,0 +1,146 @@
+﻿<%@ Master Language="VB" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+
+    Protected Sub Timer1_Tick(ByVal sender As Object, ByVal e As System.EventArgs)
+        Label1.Text = Now
+    End Sub
+
+    Protected Sub LinkButton1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-data.aspx")
+    End Sub
+
+    Protected Sub LinkButton5_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-login.aspx")
+    End Sub
+
+    Protected Sub LinkButton2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-s-data.aspx")
+    End Sub
+
+    Protected Sub LinkButton6_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-class.aspx")
+    End Sub
+
+    Protected Sub LinkButton3_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-testdata.aspx")
+    End Sub
+
+    Protected Sub LinkButton4_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-s-score.aspx")
+    End Sub
+
+    Protected Sub LinkButton7_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-plan-class.aspx")
+    End Sub
+
+    Protected Sub LinkButton8_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-open-class.aspx")
+    End Sub
+
+    Protected Sub LinkButton10_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-test-answer.aspx")
+    End Sub
+
+    Protected Sub LinkButton9_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-test-design.aspx")
+    End Sub
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>未命名頁面</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 100%;
+        }
+        .style3
+        {
+            height: 21px;
+            text-align: center;
+            font-family: 標楷體;
+            font-size: large;
+        }
+        .style4
+        {
+            font-family: 標楷體;
+            font-size: xx-large;
+        }
+        </style>
+</head>
+<body background="未命名%20-10.jpg">
+    <form id="form1" runat="server" 
+    style="height: 557px;">
+    <div>
+    </div>
+    <table class="style1">
+        <tr>
+            <td style="text-align: center" colspan="3">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:ScriptManager ID="ScriptManager1" runat="server">
+                        </asp:ScriptManager>
+                        <span class="style4">
+                        <asp:Timer ID="Timer1" runat="server" Interval="1000" ontick="Timer1_Tick">
+                        </asp:Timer>
+                        學生管理頁面 
+                         
+                        <br />
+  <asp:Label ID="Label1" runat="server" 
+                            style=" font-weight: 700; text-align: right;" 
+                            Font-Size="Medium"></asp:Label>
+                        </span>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </td>
+        </tr>
+        <tr>
+            <td class="style3">
+                &nbsp;</td>
+            <td class="style3">
+                <asp:Menu ID="Menu1" runat="server" BackColor="#FFFBD6" 
+                    DynamicHorizontalOffset="2" Font-Names="金梅大胖胖個性字" Font-Size="X-Large" 
+                    ForeColor="#990000" Height="16px" Orientation="Horizontal" 
+                    StaticSubMenuIndent="10px" 
+                    style="font-size: xx-large; font-family: 金梅大胖胖個性字" 
+                    BorderStyle="Inset" Width="934px">
+                    <StaticSelectedStyle BackColor="#FFCC66" />
+                    <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <DynamicHoverStyle BackColor="#990000" ForeColor="White" />
+                    <DynamicMenuStyle BackColor="#FFFBD6" />
+                    <DynamicSelectedStyle BackColor="#FFCC66" />
+                    <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                    <StaticHoverStyle BackColor="#990000" ForeColor="White" />
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/st-data.aspx" Text="基本資料" Value="0"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/s-select-class.aspx" Text="選課作業" Value="1">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/s-test-select.aspx" Text="進入測驗" Value="2">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/s-score.aspx" Text="成績查詢" Value="3"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/s-t-data.aspx" Text="教師資料" Value="4">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/login.aspx" Text="登出" Value="5"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </td>
+            <td class="style3">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

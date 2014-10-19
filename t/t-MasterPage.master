@@ -1,0 +1,237 @@
+﻿<%@ Import Namespace="Microsoft.VisualBasic.ApplicationServices" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script runat="server">
+
+    Protected Sub LinkButton1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-data.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton5_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-login.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-s-data.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton6_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-class.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton3_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-testdata.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton4_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-s-score.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton7_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-plan-class.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton8_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-open-class.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton10_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-test-answer.aspx", True)
+        Session("IsLeave") = True
+    End Sub
+
+    Protected Sub LinkButton9_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("t-test-design.aspx", True)
+          Session("IsLeave") = True
+    End Sub
+
+    Protected Sub Menu1_MenuItemClick(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.MenuEventArgs)
+        'Menu1.StaticSelectedStyle.BackColor = Drawing.Color.Blue
+    End Sub
+    
+    Protected Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs)
+        If Page.User.Identity.IsAuthenticated = True Then
+            Dim conn As Data.SqlClient.SqlConnection, cmd As Data.SqlClient.SqlCommand
+            Dim Rd As Data.SqlClient.SqlDataReader, SQL As String
+            conn = New Data.SqlClient.SqlConnection("Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|INTE.mdf;Integrated Security=True;User Instance=True")
+            conn.Open()
+            SQL = "SELECT 姓名 FROM 教師 WHERE 帳號 = '" & Me.Page.User.Identity.Name & "'"
+            cmd = New Data.SqlClient.SqlCommand(SQL, conn)
+            Rd = cmd.ExecuteReader
+            Rd.Read()
+            Session("TeacherName") = Rd.Item("姓名").ToString
+            Me.Label_TeacherName.Text = Session("TeacherName")
+            Session("OK_userid") = Page.User.Identity.Name()
+        Else
+            Session.RemoveAll()
+            FormsAuthentication.SignOut()
+            FormsAuthentication.RedirectToLoginPage()
+        End If
+    End Sub
+    Public Sub MsgBox(ByVal Message As String)
+        Dim sScript As String
+        Dim sMessage As String
+
+        sMessage = Strings.Replace(Message, "'", "\'") '處理單引號
+        sMessage = Strings.Replace(sMessage, vbNewLine, "\n") '處理換行
+        sScript = String.Format("alert('{0}');", sMessage)
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "alert", sScript, True)
+    End Sub
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Protected Sub Label_TeacherName_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Response.Redirect("~/t/t-data.aspx", True )
+        
+    End Sub
+
+    Protected Sub LinkButton1_Click1(ByVal sender As Object, ByVal e As System.EventArgs)
+        Session.RemoveAll()
+        FormsAuthentication.SignOut()
+        FormsAuthentication.RedirectToLoginPage()
+    End Sub
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server"> 
+     <title></title>
+      <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+           <style type="text/css">
+
+            .container0
+            {
+                background: #FFFFFF;
+                
+                width: 1000px; /* 這樣將會建立為 80% 瀏覽器寬度的容器 */
+                background-repeat: no-repeat;
+                background-position: 50% 0;
+                background-attachment: fixed ;
+                background-image: url(   '../images/bg.jpg' );
+                margin: 0 auto; /* 自動邊界 (搭配寬度) 會讓頁面置中對齊 */
+                border: 1px solid #CCCCCC;
+                text-align: left; /* 這樣做會覆寫 Body 元素上的 text-align: center。 */
+                margin-top: -10px;
+            }
+
+        </style>
+
+</head>
+<body style="background-color: #202020;">
+    <form id="form1" runat="server" clientidmode="AutoID">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnableHistory="True">
+    </asp:ScriptManager>
+    <div id="container0" class="container0">
+        <div id="mainContent0">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="style22" style="width: 180px; vertical-align: top">
+                        <img alt="e-tasks" class="style25" src="../images/logo.png" />
+
+                    </td>
+                    <td class="style4" style="vertical-align: top; text-align: right;">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <span lang="zh-tw">
+                                    ﹝<asp:LinkButton ID="Label_TeacherName" runat="server" 
+                                    onclick="Label_TeacherName_Click">LinkButton</asp:LinkButton>
+                                ﹞
+                                    <asp:Label ID="Label3" runat="server" Text="正登入為"></asp:Label>
+                                    ﹝<asp:LoginName ID="LoginName1" runat="server" Font-Bold="True" Font-Italic="True" />
+                                    ﹞｜</span><asp:LinkButton ID="LinkButton1" runat="server" 
+                                    onclick="LinkButton1_Click1">登出</asp:LinkButton>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C0C0C0;
+                       ">
+                        <table align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td>
+                                
+                                </td>
+                                <td style="text-align: center">
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Menu ID="Menu1" runat="server" 
+                                                DynamicHorizontalOffset="2" Font-Bold="True" Font-Names="Verdana" 
+                                                Font-Overline="False" Font-Size="0.8em" Font-Strikeout="False" 
+                                                Font-Underline="True" ForeColor="#284E98" Height="16px" 
+                                                OnMenuItemClick="Menu1_MenuItemClick" Orientation="Horizontal" 
+                                                StaticSubMenuIndent="10px" style="Width:903px; font-size: x-large;">
+                                                <StaticSelectedStyle BackColor="#507CD1" Font-Size="X-Large" />
+                                                <StaticMenuItemStyle Font-Size="X-Large" HorizontalPadding="5px" 
+                                                    VerticalPadding="2px" />
+                                                <StaticHoverStyle BackColor="#284E98" Font-Size="X-Large" ForeColor="White" />
+                                                <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
+                                                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" Font-Size="x-Large"  />
+                                                <DynamicMenuStyle BackColor="#B5C7DE" />
+                                                <DynamicSelectedStyle BackColor="#507CD1" />
+                                                <DynamicItemTemplate>
+                                                    <%# Eval("Text") %>
+                                                </DynamicItemTemplate>
+                                                <Items>
+                                                    <asp:MenuItem NavigateUrl="~/t/t-data.aspx" Text="主控台" Value="0"></asp:MenuItem>
+                                                    <asp:MenuItem NavigateUrl="~/t/t-s-data.aspx" Text="學生資料列表" Value="1">
+                                                    </asp:MenuItem>
+                                                    <asp:MenuItem NavigateUrl="~/t/t-s-score.aspx" Text="成績列表" Value="8">
+                                                    </asp:MenuItem>
+                                                    <asp:MenuItem Selectable="False" Text="課程編輯" Value="2">
+                                                        <asp:MenuItem NavigateUrl="~/t/t-class.aspx" Text="  課程規劃    " Value="3">
+                                                        </asp:MenuItem>
+                                                        <asp:MenuItem NavigateUrl="~/t/t-plan-class.aspx" Text="班級規劃" Value="4">
+                                                        </asp:MenuItem>
+                                                        <asp:MenuItem NavigateUrl="~/t/t-open-class.aspx" Text="開班授課" Value="5">
+                                                        </asp:MenuItem>
+                                                    </asp:MenuItem>
+                                                    <asp:MenuItem Selectable="False" Text="題庫管理" Value="6">
+                                                        <asp:MenuItem Text="題庫編輯" Value="6">
+                                                            <asp:MenuItem NavigateUrl="~/t/t-testdata-new.aspx" Text=" 新增題目" Value="12">
+                                                            </asp:MenuItem>
+                                                            <asp:MenuItem NavigateUrl="~/t/t-testdata.aspx" Text="刪除題目" Value="13">
+                                                            </asp:MenuItem>
+                                                            <asp:MenuItem NavigateUrl="~/t/t-testdata1.aspx" Text="現有題目" Value="14">
+                                                            </asp:MenuItem>
+                                                        </asp:MenuItem>
+                                                        <asp:MenuItem NavigateUrl="~/t/t-test-design.aspx" Text="試卷編輯" Value="7">
+                                                        </asp:MenuItem>
+                                                        <asp:MenuItem NavigateUrl="~/t/t-test-answer.aspx" Text="答案編輯" Value="8">
+                                                        </asp:MenuItem>
+                                                    </asp:MenuItem>
+                                                </Items>
+                                                <StaticItemTemplate>
+                                                    <%# Eval("Text") %>
+                                                </StaticItemTemplate>
+                                            </asp:Menu>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <br />
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!-- end #mainContent -->
+        </div>
+        <!-- end #container -->
+    </div>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+    </form>
+
+</body>
+</html>

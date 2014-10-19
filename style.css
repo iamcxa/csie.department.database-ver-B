@@ -1,0 +1,48 @@
+        -- body
+        {
+            font: 100% Arial Unicode MS, 新細明體;
+            font-size: small;
+            margin:0; /* 比較好的做法是將 Body 元素的邊界與欄位間隔調整為零，以處理不同的瀏覽器預設值 */
+            padding:0;
+            text-align: center; /* 這樣會讓容器在 IE 5* 瀏覽器內置中對齊。然後，文字會在 #container 選取器中設定為靠左對齊預設值 */
+            color: #000000;
+        }
+        .body
+        {
+            background-repeat: no-repeat;
+            background-position: 0% 0%;
+            background-attachment: fixed;
+            background-color: #202020; /*background-image: url('images/cat10_5.jpg');*/
+        }
+        .container2
+        {
+            
+            background: #FFFFFF;
+            height: 100%;
+            width: 1000px; /* 這樣將會建立為 80% 瀏覽器寬度的容器 */
+            background-repeat: no-repeat;
+                        background-position: 50% 0%;
+            background-attachment:  fixed    ;
+
+            background-image: url(   './images/bg.jpg' );
+            margin: 0 auto; /* 自動邊界 (搭配寬度) 會讓頁面置中對齊 */
+            border: 1px solid #CCCCCC;
+            text-align: left; /* 這樣做會覆寫 Body 元素上的 text-align: center。 */
+            
+             
+        }
+        .oneColLiqCtr #mainContent
+        {
+            padding: 0 20px; /* 請記住，欄位間隔就是 Div 方塊內部的空間，而邊界就是 Div 方塊外部的空間 */
+        }
+        .style1
+        {
+            text-align:center ;
+            width :100%;
+        }
+        
+        .Main
+        {
+              margin-top: -180px;
+
+            }
